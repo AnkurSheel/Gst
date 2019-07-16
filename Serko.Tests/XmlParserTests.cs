@@ -48,5 +48,20 @@ Ivan
             Assert.Equal("development team’s project end celebration dinner", emailData.Description);
             Assert.Equal("Tuesday 27 April 2017", emailData.Date);
         }
+
+        [Fact]
+        public void ExtractXml_ValidExpenseText_ValidExpenseModel()
+        {
+            const string EmailText = @"
+<expense><cost_centre>DEV002</cost_centre>
+    <total>1024.01</total><payment_method>personal card</payment_method>
+</expense>
+";
+
+            var emailData = _xmlParser.ExtractXml(EmailText);
+            Assert.Equal("DEV002", emailData.Expense.CostCenter);
+            Assert.Equal(1024.01M, emailData.Expense.Total, 2);
+            Assert.Equal("personal card", emailData.Expense.PaymentMethod);
+        }
     }
 }

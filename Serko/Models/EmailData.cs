@@ -2,8 +2,10 @@
 
 namespace Serko.Models
 {
+    [XmlRoot("root")]
     public class EmailData
     {
+        [XmlElement("expense")]
         public Expense Expense { get; set; }
 
         public string Vendor { get; set; }
