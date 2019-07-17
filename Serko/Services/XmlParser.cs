@@ -9,17 +9,17 @@ namespace Serko.Services
 {
     public class XmlParser : IXmlParser
     {
-        public EmailData ExtractXml(string text)
+        public ExtractedEmailData ExtractData(string text)
         {
-            EmailData emailData;
+            ExtractedEmailData extractedEmailData;
             text = CleanDataForXmlParsing(text);
             var xmlText = $"<root>{text}</root>";
             try
             {
-                var serializer = new XmlSerializer(typeof(EmailData));
+                var serializer = new XmlSerializer(typeof(ExtractedEmailData));
                 using (TextReader reader = new StringReader(xmlText))
                 {
-                    emailData = (EmailData)serializer.Deserialize(reader);
+                    extractedEmailData = (ExtractedEmailData)serializer.Deserialize(reader);
                 }
             }
             catch (Exception e)
@@ -28,7 +28,7 @@ namespace Serko.Services
                 throw;
             }
 
-            return emailData;
+            return extractedEmailData;
         }
 
         private string CleanDataForXmlParsing(string text)

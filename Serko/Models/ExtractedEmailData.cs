@@ -3,7 +3,7 @@
 namespace Serko.Models
 {
     [XmlRoot("root")]
-    public class EmailData
+    public class ExtractedEmailData
     {
         [XmlElement("expense")]
         public Expense Expense { get; set; }

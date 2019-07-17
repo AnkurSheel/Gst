@@ -14,7 +14,7 @@ namespace Serko.Tests
         }
 
         [Fact]
-        public void ExtractXml_ValidFullEmailText_ValidEmailDataModel()
+        public void ExtractData_ValidFullEmailText_ValidEmailDataModel()
         {
             const string EmailText = @"
 Hi Yvaine,
@@ -40,7 +40,7 @@ Regards,
 Ivan
 ";
 
-            var emailData = _xmlParser.ExtractXml(EmailText);
+            var emailData = _xmlParser.ExtractData(EmailText);
             Assert.Equal("DEV002", emailData.Expense.CostCenter);
             Assert.Equal(1024.01M, emailData.Expense.Total);
             Assert.Equal("personal card", emailData.Expense.PaymentMethod);
@@ -50,7 +50,7 @@ Ivan
         }
 
         [Fact]
-        public void ExtractXml_ValidFullEmailTextWithNoEmail_ValidEmailDataModel()
+        public void ExtractData_ValidFullEmailTextWithNoEmail_ValidEmailDataModel()
         {
             const string EmailText = @"
 Hi Yvaine,
@@ -75,7 +75,7 @@ Regards,
 Ivan
 ";
 
-            var emailData = _xmlParser.ExtractXml(EmailText);
+            var emailData = _xmlParser.ExtractData(EmailText);
             Assert.Equal("DEV002", emailData.Expense.CostCenter);
             Assert.Equal(1024.01M, emailData.Expense.Total);
             Assert.Equal("personal card", emailData.Expense.PaymentMethod);
@@ -85,7 +85,7 @@ Ivan
         }
 
         [Fact]
-        public void ExtractXml_ValidExpenseText_ValidExpenseModel()
+        public void ExtractData_ValidExpenseText_ValidExpenseModel()
         {
             const string EmailText = @"
 <expense><cost_centre>DEV002</cost_centre>
@@ -93,7 +93,7 @@ Ivan
 </expense>
 ";
 
-            var emailData = _xmlParser.ExtractXml(EmailText);
+            var emailData = _xmlParser.ExtractData(EmailText);
             Assert.Equal("DEV002", emailData.Expense.CostCenter);
             Assert.Equal(1024.01M, emailData.Expense.Total, 2);
             Assert.Equal("personal card", emailData.Expense.PaymentMethod);
