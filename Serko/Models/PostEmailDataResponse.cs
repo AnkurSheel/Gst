@@ -2,6 +2,8 @@
 {
     public class PostEmailDataResponse
     {
-        public ExtractedEmailData ExtractedData { get; set; }
+        public ExtractedExpenseData ExtractedData { get; set; }
     }
+
+    
 }

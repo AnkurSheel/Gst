@@ -4,13 +4,13 @@ using Xunit;
 
 namespace Serko.Tests
 {
-    public class XmlParserTests
+    public class EmailParserTests
     {
-        private readonly IXmlParser _xmlParser;
+        private readonly IEmailParser _emailParser;
 
-        public XmlParserTests()
+        public EmailParserTests()
         {
-            _xmlParser = new XmlParser();
+            _emailParser = new EmailParser();
         }
 
         [Fact]
@@ -40,7 +40,7 @@ Regards,
 Ivan
 ";
 
-            var emailData = _xmlParser.ExtractData(EmailText);
+            var emailData = _emailParser.ExtractData(EmailText);
             Assert.Equal("DEV002", emailData.Expense.CostCenter);
             Assert.Equal(1024.01M, emailData.Expense.Total);
             Assert.Equal("personal card", emailData.Expense.PaymentMethod);
@@ -75,7 +75,7 @@ Regards,
 Ivan
 ";
 
-            var emailData = _xmlParser.ExtractData(EmailText);
+            var emailData = _emailParser.ExtractData(EmailText);
             Assert.Equal("DEV002", emailData.Expense.CostCenter);
             Assert.Equal(1024.01M, emailData.Expense.Total);
             Assert.Equal("personal card", emailData.Expense.PaymentMethod);
@@ -93,7 +93,7 @@ Ivan
 </expense>
 ";
 
-            var emailData = _xmlParser.ExtractData(EmailText);
+            var emailData = _emailParser.ExtractData(EmailText);
             Assert.Equal("DEV002", emailData.Expense.CostCenter);
             Assert.Equal(1024.01M, emailData.Expense.Total, 2);
             Assert.Equal("personal card", emailData.Expense.PaymentMethod);

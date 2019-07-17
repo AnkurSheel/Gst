@@ -9,17 +9,17 @@ namespace Serko.Controllers
     [ApiController]
     public class EmailDataController : Controller
     {
-        private readonly IXmlParser _xmlParser;
+        private readonly IEmailParser _emailParser;
 
-        public EmailDataController(IXmlParser xmlParser)
+        public EmailDataController(IEmailParser emailParser)
         {
-            _xmlParser = xmlParser;
+            _emailParser = emailParser;
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] PostEmailDataRequest input)
         {
-            var extractedData = _xmlParser.ExtractData(input.Data);
+            var extractedData = _emailParser.ExtractData(input.Data);
             var response = new PostEmailDataResponse() { ExtractedData = extractedData };
             return Ok(response);
         }

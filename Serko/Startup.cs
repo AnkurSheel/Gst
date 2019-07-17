@@ -14,7 +14,7 @@ namespace Serko
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddScoped<IXmlParser, XmlParser>();
+            services.AddScoped<IEmailParser, EmailParser>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

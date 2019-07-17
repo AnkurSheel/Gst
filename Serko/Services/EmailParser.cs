@@ -7,19 +7,19 @@ using Serko.Models;
 
 namespace Serko.Services
 {
-    public class XmlParser : IXmlParser
+    public class EmailParser : IEmailParser
     {
-        public ExtractedEmailData ExtractData(string text)
+        public ExtractedExpenseData ExtractData(string text)
         {
-            ExtractedEmailData extractedEmailData;
+            ExtractedExpenseData extractedExpenseData;
             text = CleanDataForXmlParsing(text);
             var xmlText = $"<root>{text}</root>";
             try
             {
-                var serializer = new XmlSerializer(typeof(ExtractedEmailData));
+                var serializer = new XmlSerializer(typeof(ExtractedExpenseData));
                 using (TextReader reader = new StringReader(xmlText))
                 {
-                    extractedEmailData = (ExtractedEmailData)serializer.Deserialize(reader);
+                    extractedExpenseData = (ExtractedExpenseData)serializer.Deserialize(reader);
                 }
             }
             catch (Exception e)
@@ -28,7 +28,7 @@ namespace Serko.Services
                 throw;
             }
 
-            return extractedEmailData;
+            return extractedExpenseData;
         }
 
         private string CleanDataForXmlParsing(string text)
