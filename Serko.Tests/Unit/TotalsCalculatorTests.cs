@@ -2,7 +2,7 @@
 
 using Xunit;
 
-namespace Serko.Tests
+namespace Serko.Tests.Unit
 {
     public class TotalsCalculatorTests
     {

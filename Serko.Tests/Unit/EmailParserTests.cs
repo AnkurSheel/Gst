@@ -3,7 +3,7 @@ using Serko.Services;
 
 using Xunit;
 
-namespace Serko.Tests
+namespace Serko.Tests.Unit
 {
     public class EmailParserTests
     {

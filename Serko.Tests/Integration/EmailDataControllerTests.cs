@@ -13,7 +13,7 @@ using Serko.Models;
 
 using Xunit;
 
-namespace Serko.Tests
+namespace Serko.Tests.Integration
 {
     public class EmailDataControllerTests : IDisposable
     {
