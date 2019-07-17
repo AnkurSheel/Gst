@@ -80,10 +80,10 @@ namespace Serko.Tests.Unit
         }
 
         [Fact]
-        public void Post_EmailParserThrowsException_InternalServerError()
+        public void Post_ExtractExpenseException_InternalServerError()
         {
             _emailCleaner.Clean("").ReturnsForAnyArgs("");
-            _emailParser.ExtractData("").ThrowsForAnyArgs<ExtractExpenseException>();
+            _emailParser.ExtractData("").ThrowsForAnyArgs<ExtractDataException>();
 
             // Act
             var result = _controller.Post(new PostEmailDataRequest());

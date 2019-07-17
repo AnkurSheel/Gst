@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using Serko.Exceptions;
@@ -33,19 +32,19 @@ namespace Serko.Controllers
             {
                 var cleanedText = _emailCleaner.Clean(input.Data);
                 var extractedData = _emailParser.ExtractData(cleanedText);
-                var totals = _totalsCalculator.Calculate(extractedData.Expense.Total?? 0);
-                response = new PostEmailDataResponse() { ExtractedData = extractedData, Totals = totals };
-
+                var totals = _totalsCalculator.Calculate(extractedData.Expense.Total ?? 0);
+                response = new PostEmailDataResponse { ExtractedData = extractedData, Totals = totals };
             }
-            catch (ExtractExpenseException extractExpenseException)
+            catch (ExtractDataException ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, extractExpenseException.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
             catch (MissingTotalException ex)
             {
                 return BadRequest(ex.Message);
             }
-            return Ok(response);
 
+            return Ok(response);
         }
     }
 }

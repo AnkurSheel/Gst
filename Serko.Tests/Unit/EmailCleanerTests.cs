@@ -37,7 +37,7 @@ Some more data
 ";
 
             var cleanedText = _emailCleaner.Clean(EmailText);
-            Assert.Equal(ExpectedText, cleanedText, ignoreLineEndingDifferences:true);
+            Assert.Equal(ExpectedText, cleanedText, ignoreLineEndingDifferences: true);
         }
     }
 }

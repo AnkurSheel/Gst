@@ -4,7 +4,8 @@ namespace Serko.Exceptions
 {
     public class MissingTotalException : Exception
     {
-        public MissingTotalException() :base("Total is missing")
+        public MissingTotalException()
+            : base("Total is missing")
         {
         }
     }

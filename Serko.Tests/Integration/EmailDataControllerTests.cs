@@ -34,7 +34,7 @@ namespace Serko.Tests.Integration
         }
 
         [Fact]
-        public async Task Post_ValidFullEmailText_ValidResponseAndExtractedData()
+        public async Task Post_ValidFullEmailText_OkResponseAndExtractedData()
         {
             const string EmailText = @"
 Hi Yvaine,
@@ -79,7 +79,7 @@ Ivan
         }
 
         [Fact]
-        public async Task Post_ValidFullEmailText_ValidResponseAndCalculatedData()
+        public async Task Post_ValidFullEmailText_OkResponseAndCalculatedData()
         {
             const string EmailText = @"
 Hi Yvaine,

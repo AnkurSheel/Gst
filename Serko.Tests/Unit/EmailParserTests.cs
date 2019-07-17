@@ -81,7 +81,7 @@ Subject: test
 Hi Antoine,
 ";
 
-            var ex = Assert.Throws<ExtractExpenseException>(() => _emailParser.ExtractData(EmailText));
+            var ex = Assert.Throws<ExtractDataException>(() => _emailParser.ExtractData(EmailText));
             Assert.Equal("Could not extract data", ex.Message);
             Assert.NotNull(ex.InnerException);
         }
@@ -96,7 +96,7 @@ Hi Antoine,
 Hi Antoine,
 ";
 
-            var ex = Assert.Throws<ExtractExpenseException>(() => _emailParser.ExtractData(EmailText));
+            var ex = Assert.Throws<ExtractDataException>(() => _emailParser.ExtractData(EmailText));
             Assert.Equal("Could not extract data", ex.Message);
             Assert.NotNull(ex.InnerException);
         }

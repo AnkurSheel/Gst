@@ -24,13 +24,14 @@ namespace Serko.Services
             catch (Exception e)
             {
                 //Todo: we should log this
-                throw new ExtractExpenseException("Could not extract data", e);
+                throw new ExtractDataException("Could not extract data", e);
             }
 
             if (extractedExpenseData.Expense.Total == null)
             {
                 throw new MissingTotalException();
             }
+
             return extractedExpenseData;
         }
     }
