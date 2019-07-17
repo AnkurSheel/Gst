@@ -1,3 +1,4 @@
+using Serko.Exceptions;
 using Serko.Services;
 
 using Xunit;
@@ -60,6 +61,28 @@ Ivan
             Assert.Equal("DEV002", emailData.Expense.CostCenter);
             Assert.Equal(1024.01M, emailData.Expense.Total, 2);
             Assert.Equal("personal card", emailData.Expense.PaymentMethod);
+        }
+
+        [Fact]
+        public void ExtractData_InvalidText_ThrowsException()
+        {
+            const string EmailText = @"
+<expense><cost_centre>DEV002</cost_centre>
+    <total>1024.01</total><payment_method>personal card</payment_method>
+</expense>
+
+From: Ivan Castle
+Sent: Friday, 16 February 2018 10:32 AM
+To: Antoine Lloyd <Antoine.Lloyd@example.com>
+Subject: test
+
+
+Hi Antoine,
+";
+
+           var ex = Assert.Throws<ExtractExpenseException>(() => _emailParser.ExtractData(EmailText));
+           Assert.Equal("Could not extract data", ex.Message);
+           Assert.NotNull(ex.InnerException);
         }
     }
 }

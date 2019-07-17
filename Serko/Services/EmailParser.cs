@@ -2,6 +2,7 @@
 using System.IO;
 using System.Xml.Serialization;
 
+using Serko.Exceptions;
 using Serko.Models;
 
 namespace Serko.Services
@@ -22,8 +23,8 @@ namespace Serko.Services
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                //Todo: we should log this
+                throw new ExtractExpenseException("Could not extract data", e);
             }
 
             return extractedExpenseData;
