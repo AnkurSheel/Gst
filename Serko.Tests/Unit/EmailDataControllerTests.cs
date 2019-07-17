@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 
 using Serko.Controllers;
+using Serko.Exceptions;
 using Serko.Models;
 using Serko.Services;
 
@@ -74,6 +76,19 @@ namespace Serko.Tests.Unit
             Assert.Equal(1.1M, returnValue.Totals.Gst);
             Assert.Equal(2.7M, returnValue.Totals.TotalExcludingGst);
             Assert.Equal(3.6M, returnValue.Totals.TotalIncludingGst);
+        }
+
+        [Fact]
+        public void Post_EmailParserThrowsException_BadRequest()
+        {
+            _emailCleaner.Clean("").ReturnsForAnyArgs("");
+            _emailParser.ExtractData("").ThrowsForAnyArgs<ExtractExpenseException>();
+
+            // Act
+            var result = _controller.Post(new PostEmailDataRequest());
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
         }
     }
 }

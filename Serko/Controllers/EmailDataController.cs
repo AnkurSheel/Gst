@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 
+using Serko.Exceptions;
 using Serko.Models;
 using Serko.Services;
 
@@ -25,11 +27,21 @@ namespace Serko.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] PostEmailDataRequest input)
         {
-            var cleanedText = _emailCleaner.Clean(input.Data);
-            var extractedData = _emailParser.ExtractData(cleanedText);
-            var totals = _totalsCalculator.Calculate(extractedData.Expense.Total);
-            var response = new PostEmailDataResponse() { ExtractedData = extractedData, Totals = totals};
+            PostEmailDataResponse response;
+            try
+            {
+                var cleanedText = _emailCleaner.Clean(input.Data);
+                var extractedData = _emailParser.ExtractData(cleanedText);
+                var totals = _totalsCalculator.Calculate(extractedData.Expense.Total);
+                response = new PostEmailDataResponse() { ExtractedData = extractedData, Totals = totals };
+
+            }
+            catch (ExtractExpenseException extractExpenseException)
+            {
+                return BadRequest(extractExpenseException);
+            }
             return Ok(response);
+
         }
     }
 }
