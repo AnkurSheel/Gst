@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using Serko.Exceptions;
@@ -38,7 +39,7 @@ namespace Serko.Controllers
             }
             catch (ExtractExpenseException extractExpenseException)
             {
-                return BadRequest(extractExpenseException.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, extractExpenseException.Message);
             }
             return Ok(response);
 

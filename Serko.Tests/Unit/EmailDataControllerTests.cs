@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
@@ -79,7 +80,7 @@ namespace Serko.Tests.Unit
         }
 
         [Fact]
-        public void Post_EmailParserThrowsException_BadRequest()
+        public void Post_EmailParserThrowsException_InternalServerError()
         {
             _emailCleaner.Clean("").ReturnsForAnyArgs("");
             _emailParser.ExtractData("").ThrowsForAnyArgs<ExtractExpenseException>();
@@ -88,7 +89,8 @@ namespace Serko.Tests.Unit
             var result = _controller.Post(new PostEmailDataRequest());
 
             // Assert
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            var objectResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(StatusCodes.Status500InternalServerError, objectResult.StatusCode);
         }
     }
 }

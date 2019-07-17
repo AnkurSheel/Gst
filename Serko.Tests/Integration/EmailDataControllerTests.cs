@@ -121,7 +121,7 @@ Ivan
         }
 
         [Fact]
-        public async Task Post_MissingClosingTag_BadRequestResponse()
+        public async Task Post_MissingClosingTag_InternalServerResponse()
         {
             const string EmailText = @"
 <expense><cost_centre>DEV002</cost_centre>
@@ -133,7 +133,7 @@ Hi Antoine,
             var content = new StringContent(JsonConvert.SerializeObject(input), Encoding.UTF8, "application/json");
             var response = await _client.PostAsync("api/email", content);
 
-            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
             var jsonFromPostResponse = await response.Content.ReadAsStringAsync();
             Assert.Equal("Could not extract data", jsonFromPostResponse);
         }
