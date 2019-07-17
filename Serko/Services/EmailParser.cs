@@ -32,6 +32,8 @@ namespace Serko.Services
                 throw new MissingTotalException();
             }
 
+            extractedExpenseData.Expense.CostCenter = extractedExpenseData.Expense.CostCenter ?? "UNKNOWN";
+
             return extractedExpenseData;
         }
     }

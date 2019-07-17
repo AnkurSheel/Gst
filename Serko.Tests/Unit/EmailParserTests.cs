@@ -113,5 +113,18 @@ Hi Antoine,
             var ex = Assert.Throws<MissingTotalException>(() => _emailParser.ExtractData(EmailText));
             Assert.Equal("Total is missing", ex.Message);
         }
+
+        [Fact]
+        public void ExtractData_MissingCostCenter_DefaultsToUnknown()
+        {
+            const string EmailText = @"
+<expense>
+    <total>1024.01</total>
+</expense>
+";
+
+            var emailData = _emailParser.ExtractData(EmailText);
+            Assert.Equal("UNKNOWN", emailData.Expense.CostCenter);
+        }
     }
 }
