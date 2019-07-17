@@ -137,5 +137,22 @@ Hi Antoine,
             var jsonFromPostResponse = await response.Content.ReadAsStringAsync();
             Assert.Equal("Could not extract data", jsonFromPostResponse);
         }
+
+        [Fact]
+        public async Task Post_MissingTotal_BadRequestResponse()
+        {
+            const string EmailText = @"
+<expense><cost_centre>DEV002</cost_centre>
+    <payment_method>personal card</payment_method>
+</expense>
+";
+            var input = new PostEmailDataRequest { Data = EmailText };
+            var content = new StringContent(JsonConvert.SerializeObject(input), Encoding.UTF8, "application/json");
+            var response = await _client.PostAsync("api/email", content);
+
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            var jsonFromPostResponse = await response.Content.ReadAsStringAsync();
+            Assert.Equal("Total is missing", jsonFromPostResponse);
+        }
     }
 }

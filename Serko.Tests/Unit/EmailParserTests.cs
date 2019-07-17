@@ -59,7 +59,8 @@ Ivan
 
             var emailData = _emailParser.ExtractData(EmailText);
             Assert.Equal("DEV002", emailData.Expense.CostCenter);
-            Assert.Equal(1024.01M, emailData.Expense.Total, 2);
+            Assert.NotNull(emailData.Expense.Total);
+            Assert.Equal(1024.01M, emailData.Expense.Total ?? 0, 2);
             Assert.Equal("personal card", emailData.Expense.PaymentMethod);
         }
 
@@ -80,13 +81,13 @@ Subject: test
 Hi Antoine,
 ";
 
-           var ex = Assert.Throws<ExtractExpenseException>(() => _emailParser.ExtractData(EmailText));
-           Assert.Equal("Could not extract data", ex.Message);
-           Assert.NotNull(ex.InnerException);
+            var ex = Assert.Throws<ExtractExpenseException>(() => _emailParser.ExtractData(EmailText));
+            Assert.Equal("Could not extract data", ex.Message);
+            Assert.NotNull(ex.InnerException);
         }
 
         [Fact]
-        public void ExtractData_MissingClosingTag_ThrowsException()
+        public void ExtractData_MissingClosingTag_ThrowsExtractExpenseException()
         {
             const string EmailText = @"
 <expense><cost_centre>DEV002</cost_centre>
@@ -98,6 +99,19 @@ Hi Antoine,
             var ex = Assert.Throws<ExtractExpenseException>(() => _emailParser.ExtractData(EmailText));
             Assert.Equal("Could not extract data", ex.Message);
             Assert.NotNull(ex.InnerException);
+        }
+
+        [Fact]
+        public void ExtractData_MissingTotal_ThrowsMissingTotalException()
+        {
+            const string EmailText = @"
+<expense><cost_centre>DEV002</cost_centre>
+    <payment_method>personal card</payment_method>
+</expense>
+";
+
+            var ex = Assert.Throws<MissingTotalException>(() => _emailParser.ExtractData(EmailText));
+            Assert.Equal("Total is missing", ex.Message);
         }
     }
 }

@@ -33,13 +33,16 @@ namespace Serko.Controllers
             {
                 var cleanedText = _emailCleaner.Clean(input.Data);
                 var extractedData = _emailParser.ExtractData(cleanedText);
-                var totals = _totalsCalculator.Calculate(extractedData.Expense.Total);
+                var totals = _totalsCalculator.Calculate(extractedData.Expense.Total?? 0);
                 response = new PostEmailDataResponse() { ExtractedData = extractedData, Totals = totals };
 
             }
             catch (ExtractExpenseException extractExpenseException)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, extractExpenseException.Message);
+            catch (MissingTotalException ex)
+            {
+                return BadRequest(ex.Message);
             }
             return Ok(response);
 

@@ -92,5 +92,19 @@ namespace Serko.Tests.Unit
             var objectResult = Assert.IsType<ObjectResult>(result);
             Assert.Equal(StatusCodes.Status500InternalServerError, objectResult.StatusCode);
         }
+
+        [Fact]
+        public void Post_MissingTotalException_BadRequest()
+        {
+            _emailCleaner.Clean("").ReturnsForAnyArgs("");
+            _emailParser.ExtractData("").ThrowsForAnyArgs<MissingTotalException>();
+
+            // Act
+            var result = _controller.Post(new PostEmailDataRequest());
+
+            // Assert
+            var objectResult = Assert.IsType<BadRequestObjectResult>(result);
+            Assert.Equal("Total is missing", objectResult.Value);
+        }
     }
 }

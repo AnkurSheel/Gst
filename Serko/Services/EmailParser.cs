@@ -27,6 +27,10 @@ namespace Serko.Services
                 throw new ExtractExpenseException("Could not extract data", e);
             }
 
+            if (extractedExpenseData.Expense.Total == null)
+            {
+                throw new MissingTotalException();
+            }
             return extractedExpenseData;
         }
     }

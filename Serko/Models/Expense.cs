@@ -8,7 +8,7 @@ namespace Serko.Models
         public string CostCenter { get; set; }
 
         [XmlElement("total")]
-        public decimal Total { get; set; }
+        public decimal? Total { get; set; }
 
         [XmlElement("payment_method")]
         public string PaymentMethod { get; set; }
