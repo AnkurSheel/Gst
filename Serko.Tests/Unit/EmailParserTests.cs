@@ -84,5 +84,20 @@ Hi Antoine,
            Assert.Equal("Could not extract data", ex.Message);
            Assert.NotNull(ex.InnerException);
         }
+
+        [Fact]
+        public void ExtractData_MissingClosingTag_ThrowsException()
+        {
+            const string EmailText = @"
+<expense><cost_centre>DEV002</cost_centre>
+    <total>1024.01</total><payment_method>personal card</payment_method>
+
+Hi Antoine,
+";
+
+            var ex = Assert.Throws<ExtractExpenseException>(() => _emailParser.ExtractData(EmailText));
+            Assert.Equal("Could not extract data", ex.Message);
+            Assert.NotNull(ex.InnerException);
+        }
     }
 }

@@ -38,7 +38,7 @@ namespace Serko.Controllers
             }
             catch (ExtractExpenseException extractExpenseException)
             {
-                return BadRequest(extractExpenseException);
+                return BadRequest(extractExpenseException.Message);
             }
             return Ok(response);
 
