@@ -11,16 +11,20 @@ namespace Serko.Controllers
     {
         private readonly IEmailParser _emailParser;
 
-        public EmailDataController(IEmailParser emailParser)
+        private readonly ITotalsCalculator _totalsCalculator;
+
+        public EmailDataController(IEmailParser emailParser, ITotalsCalculator totalsCalculator)
         {
             _emailParser = emailParser;
+            _totalsCalculator = totalsCalculator;
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] PostEmailDataRequest input)
         {
             var extractedData = _emailParser.ExtractData(input.Data);
-            var response = new PostEmailDataResponse() { ExtractedData = extractedData };
+            var totals = _totalsCalculator.Calculate(extractedData.Expense.Total);
+            var response = new PostEmailDataResponse() { ExtractedData = extractedData, Totals = totals};
             return Ok(response);
         }
     }

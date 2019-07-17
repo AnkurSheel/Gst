@@ -15,6 +15,7 @@ namespace Serko
         {
             services.AddMvc();
             services.AddScoped<IEmailParser, EmailParser>();
+            services.AddScoped<ITotalsCalculator, TotalsCalculator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
