@@ -14,6 +14,7 @@ namespace Serko
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddScoped<IEmailCleaner, EmailCleaner>();
             services.AddScoped<IEmailParser, EmailParser>();
             services.AddScoped<ITotalsCalculator, TotalsCalculator>();
         }
