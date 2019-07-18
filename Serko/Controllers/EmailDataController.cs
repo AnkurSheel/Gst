@@ -7,7 +7,7 @@ using Serko.Services;
 
 namespace Serko.Controllers
 {
-    [Route("api/email")]
+    [Route("api/[controller]")]
     [ApiController]
     public class EmailDataController : Controller
     {

@@ -17,6 +17,7 @@ namespace Serko.Tests.Integration
 {
     public class EmailDataControllerTests : IDisposable
     {
+        private const string RequestUri = "api/EmailData";
         private readonly TestServer _server;
 
         private readonly HttpClient _client;
@@ -61,7 +62,7 @@ Ivan
 ";
             var input = new PostEmailDataRequest { Data = EmailText };
             var content = new StringContent(JsonConvert.SerializeObject(input), Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync("api/email", content);
+            var response = await _client.PostAsync(RequestUri, content);
 
             response.EnsureSuccessStatusCode();
 
@@ -95,7 +96,7 @@ Hi Antoine,
 ";
             var input = new PostEmailDataRequest { Data = EmailText };
             var content = new StringContent(JsonConvert.SerializeObject(input), Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync("api/email", content);
+            var response = await _client.PostAsync(RequestUri, content);
 
             Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
             var jsonFromPostResponse = await response.Content.ReadAsStringAsync();
@@ -112,7 +113,7 @@ Hi Antoine,
 ";
             var input = new PostEmailDataRequest { Data = EmailText };
             var content = new StringContent(JsonConvert.SerializeObject(input), Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync("api/email", content);
+            var response = await _client.PostAsync(RequestUri, content);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
             var jsonFromPostResponse = await response.Content.ReadAsStringAsync();
