@@ -1,4 +1,4 @@
-﻿namespace Serko.Services
+﻿namespace Gst.Services
 {
     public interface IEmailCleaner
     {

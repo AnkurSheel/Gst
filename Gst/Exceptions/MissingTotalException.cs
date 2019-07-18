@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Serko.Exceptions
+namespace Gst.Exceptions
 {
     public class MissingTotalException : Exception
     {

@@ -1,6 +1,6 @@
-﻿using Serko.Models;
+﻿using Gst.Models;
 
-namespace Serko.Services
+namespace Gst.Services
 {
     public interface ITotalsCalculator
     {

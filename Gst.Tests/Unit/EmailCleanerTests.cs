@@ -1,8 +1,8 @@
-﻿using Serko.Services;
+﻿using Gst.Services;
 
 using Xunit;
 
-namespace Serko.Tests.Unit
+namespace Gst.Tests.Unit
 {
     public class EmailCleanerTests
     {

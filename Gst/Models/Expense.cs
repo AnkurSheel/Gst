@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Serko.Models
+namespace Gst.Models
 {
     public class Expense
     {

@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Gst.Controllers;
+using Gst.Exceptions;
+using Gst.Models;
+using Gst.Services;
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 
-using Serko.Controllers;
-using Serko.Exceptions;
-using Serko.Models;
-using Serko.Services;
-
 using Xunit;
 
-namespace Serko.Tests.Unit
+namespace Gst.Tests.Unit
 {
     public class EmailDataControllerTests
     {

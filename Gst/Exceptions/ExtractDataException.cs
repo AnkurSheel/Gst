@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Serko.Exceptions
+namespace Gst.Exceptions
 {
     public class ExtractDataException : Exception
     {

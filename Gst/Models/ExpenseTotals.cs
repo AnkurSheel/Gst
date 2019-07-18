@@ -1,4 +1,4 @@
-﻿namespace Serko.Models
+﻿namespace Gst.Models
 {
     public class ExpenseTotals
     {

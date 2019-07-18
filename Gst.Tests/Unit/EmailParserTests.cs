@@ -1,9 +1,9 @@
-using Serko.Exceptions;
-using Serko.Services;
+using Gst.Exceptions;
+using Gst.Services;
 
 using Xunit;
 
-namespace Serko.Tests.Unit
+namespace Gst.Tests.Unit
 {
     public class EmailParserTests
     {

@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Serko.Models;
+using Gst.Models;
 
-namespace Serko.Services
+namespace Gst.Services
 {
     public class TotalsCalculator : ITotalsCalculator
     {

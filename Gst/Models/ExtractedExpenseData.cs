@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Serko.Models
+namespace Gst.Models
 {
     [XmlRoot("root")]
     public class ExtractedExpenseData

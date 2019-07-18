@@ -2,10 +2,10 @@
 using System.IO;
 using System.Xml.Serialization;
 
-using Serko.Exceptions;
-using Serko.Models;
+using Gst.Exceptions;
+using Gst.Models;
 
-namespace Serko.Services
+namespace Gst.Services
 {
     public class EmailParser : IEmailParser
     {

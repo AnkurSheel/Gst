@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Gst.Exceptions;
+using Gst.Models;
+using Gst.Services;
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-using Serko.Exceptions;
-using Serko.Models;
-using Serko.Services;
-
-namespace Serko.Controllers
+namespace Gst.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
